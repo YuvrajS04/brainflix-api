@@ -19,7 +19,6 @@ function writeVideoData(data) {
 
 videoRouter.get("/", (req, res) => {
   const videosData = readVideoData();
-  console.log("made it to router");
 
   const videos = videosData.map((video) => {
     return {
@@ -34,7 +33,6 @@ videoRouter.get("/", (req, res) => {
 
 videoRouter.get("/:id", (req, res) => {
   const videoData = readVideoData();
-  console.log("made it to single video");
 
   const selectedVideoData = videoData.find(
     (video) => video.id == req.params.id
@@ -55,7 +53,7 @@ videoRouter.post("/", (req, res) => {
     description: req.body.description,
     views: "0",
     likes: "0",
-    duration: "6:69",
+    duration: "6:20",
     video: "https://project-2-api.herokuapp.com/stream",
     timestamp: Date.now(),
     comments: []
