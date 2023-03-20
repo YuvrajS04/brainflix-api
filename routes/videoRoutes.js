@@ -5,6 +5,7 @@ const app = express();
 const { v4: uuid } = require("uuid");
 
 
+
 function readVideoData() {
   const videoFile = fs.readFileSync("./data/video-details.json");
   const videosData = JSON.parse(videoFile);
@@ -28,7 +29,6 @@ videoRouter.get("/", (req, res) => {
       channel: video.channel,
     };
   });
-  // console.log(videos);
   res.status(200).json(videos);
 });
 
@@ -39,29 +39,27 @@ videoRouter.get("/:id", (req, res) => {
   const selectedVideoData = videoData.find(
     (video) => video.id == req.params.id
   );
-  // console.log(selectedVideoData);
 
   res.status(200).json(selectedVideoData);
 });
 
 videoRouter.post("/", (req, res) => {
   const videoPostData = readVideoData();
+  const image = "https://i.imgur.com/l2Xfgpl.jpg";
 
   const newVideo = {
     id: uuid(),
     title: req.body.title,
     channel: "Yuvi",
-    image: "",
+    image: image,
     description: req.body.description,
     views: "0",
     likes: "0",
     duration: "6:69",
-    video: "",
+    video: "https://project-2-api.herokuapp.com/stream",
     timestamp: Date.now(),
     comments: []
   }
-  console.log(newVideo);
-  console.log("reached backend");
 
   videoPostData.push(newVideo);
   writeVideoData(videoPostData);
